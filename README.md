@@ -1,11 +1,11 @@
 # Zaup
-TOTP authentication using ZeroSeg
+TOTP authentication using [ZeroSeg](https://thepihut.com/products/zeroseg).
 
-Zaup uses the same sqlite3 database format as [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB); 
-this means that if you can copy the `/data/data/com.google.android.apps.authenticator/databases/databases`
-file from your android device (see references for links on how to do this) onto a Raspberry Pi, then you use
+Zaup uses the same sqlite3 database format as [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB);
+this means that if you can copy the database file from your android device (see
+references for links on how to do this) onto a Raspberry Pi, then you can use
 your Pi to display TOTP 2-factor-authentication codes.
- 
+
 ## Requirements
 
 Zaup is a 21st-century Python app, and as such requires Python3.
@@ -16,49 +16,64 @@ On your Raspberry Pi:
 
     $ git clone https://github.com/rm-hull/zaup.git
     $ cd zaup
-    $ sudo apt-get install python-pip3
-    $ pip3 install -f requirements.txt
+    $ sudo apt-get install python3-pip
+    $ sudo pip3 install -r requirements.txt
 
-Next, assuming you have managed to grab a copy of `/data/data/com.google.android.apps.authenticator/databases/databases` 
-from your android device, copy this file to the **zaup** directory. It is generally a good idea to lock down the
-file permissions:
+Next, assuming you have managed to grab a copy of
+`/data/data/com.google.android.apps.authenticator/databases/databases` from
+your android device, copy this file to the **zaup** directory. It is generally
+a good idea to lock down the file permissions:
 
     $ chmod og-rwx databases
-    
+
 Next, check that the database content is as expected:
 
     $ sqlite ./databases
-    
+
     sqlite> pragma table_info(accounts);
     0|_id|INTEGER|0||1
-    1|email|TEXT|1||0 
+    1|email|TEXT|1||0
     2|secret|TEXT|1||0
     3|counter|INTEGER|0|0|0
     4|type|INTEGER|0||0
     5|provider|INTEGER|0|0|0
     6|issuer|TEXT|0|NULL|0
     7|original_name|TEXT|0|NULL|0
-    
+
     sqlite> select * from accounts;
     1|Google:fred@example.com|sdfsdfsdfsdfsfsdfsfsfsdfsfs|0|0|0|Google|Google:fred@example.com
     2|Google:jim@example.com|weqeqwewqeqeqweqwewqeqeqewq|0|0|0|Google|Google:jim@example.com
     3|github.com/alice|hfhfghfhfhfghf|0|0|0|GitHub|github.com/alice
-    
+
     sqlite> ^D
     $
 
-_Obviously, your database records will be different to the made-up ones shown above._
+_Obviously, your database records will be different to the made-up ones shown
+above._
 
-If you want **zaup** to start automatically when the Raspberry Pi is booted, run the following:
+## Running ZAUP
 
-    $ sudo -s
-    # echo "nohup `pwd`/zaup.py &" >> /etc/rc.local
-    # exit
-    $
+If you want **zaup** to start automatically when the Raspberry Pi is booted,
+add the following to the `/etc/rc.local` file _before_ the `exit 0` line
+(obviously pick the correct directory, based on where you cloned the repo):
 
+    "/home/pi/zaup/zaup.py &
+
+else, to jusrt run it on the command-line, enter the following in the _zaup_
+directory:
+
+    $ ./zaup.py
+
+## TODO
+
+* Config settings for systemd startup
+* ability to add secrets
+* Demo video
+* Improve error handling when no database file / no records
 
 ## References
 
+* https://thepihut.com/products/zeroseg
 * http://www.howtogeek.com/130755/how-to-move-your-google-authenticator-credentials-to-a-new-android-phone-or-tablet/
 * https://dpron.com/3-ways-to-move-google-authenticator/
 
