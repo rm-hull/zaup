@@ -67,7 +67,7 @@ If you want **zaup** to start automatically when the Raspberry Pi is booted,
 add the following to the `/etc/rc.local` file _before_ the `exit 0` line
 (obviously pick the correct directory, based on where you cloned the repo):
 
-    "/home/pi/zaup/zaup.py &
+    /home/pi/zaup/zaup.py &
 
 else, to jusrt run it on the command-line, enter the following in the _zaup_
 directory:
