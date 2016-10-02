@@ -10,6 +10,10 @@ your Pi to display TOTP 2-factor-authentication codes.
 
 Zaup is a 21st-century Python app, and as such requires Python3.
 
+TOTP requires an accurate time source to operate correctly: The Raspberry Pi
+must either be connected to the internet to sync against an NTP server or
+should employ the use of a RTC add-on board.
+
 ## Setup / installation
 
 On your Raspberry Pi:
