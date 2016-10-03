@@ -74,6 +74,10 @@ directory:
 
     $ ./zaup.py
 
+Cycle through the list of different authenticator codes using the PREV and NEXT 
+buttons on the ZeroSeg. Observe the flashing dot which indicates the program
+is continuously running.
+
 ## TODO
 
 * Config settings for systemd startup
