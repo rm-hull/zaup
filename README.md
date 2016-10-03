@@ -4,7 +4,7 @@ TOTP authentication using [ZeroSeg](https://thepihut.com/products/zeroseg).
 Zaup uses the same sqlite3 database format as [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB);
 this means that if you can copy the database file from your android device (see
 references for links on how to do this) onto a Raspberry Pi, then you can use
-your Pi to display TOTP 2-factor-authentication codes.
+your Pi to display your existing TOTP 2-factor-authentication codes.
 
 ## Requirements
 
