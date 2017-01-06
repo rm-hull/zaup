@@ -1,4 +1,6 @@
 # Zaup
+[![Maintenance](https://img.shields.io/maintenance/yes/2017.svg?maxAge=2592000)]()
+
 TOTP authentication using [ZeroSeg](https://thepihut.com/products/zeroseg).
 
 Zaup uses the same sqlite3 database format as [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB);
