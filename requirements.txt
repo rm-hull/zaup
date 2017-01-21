@@ -1,3 +1,4 @@
 RPi.GPIO
-max7219
+luma.core
+luma.led_matrix
 onetimepass
