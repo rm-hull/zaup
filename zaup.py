@@ -71,13 +71,16 @@ def display_dot(secrets, last_digit, loop):
 
 
 def scroll_message(device, msg, delay=0.2):
+    width = device.width
+    padding = " " * width
+    msg = padding + msg + padding
     n = len(msg)
-    virtual = viewport(device, width=n * 3 * 8, height=8)
-    segments = sevensegment(virtual)
-    segments.text[n:] = msg
-    for x in range(n * 2):
-        virtual.set_position((x, 0))
-        time.sleep(0.2)
+
+    virtual = viewport(device, width=n, height=8)
+    sevensegment(virtual).text = msg
+    for i in reversed(list(range(n - width))):
+        virtual.set_position((i, 0))
+        time.sleep(delay)
 
 
 def display_message(secrets):
