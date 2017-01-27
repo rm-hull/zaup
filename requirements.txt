@@ -1,4 +1,5 @@
-RPi.GPIO
-luma.core
 luma.led_matrix
 onetimepass
+cchardet
+aiohttp
+qrcode
