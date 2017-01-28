@@ -11,9 +11,11 @@ import os
 import asyncio
 import functools
 import signal
+from aiohttp import web
 
 import zeroseg
 import database
+import views
 
 
 def ask_exit(signame):
@@ -22,9 +24,11 @@ def ask_exit(signame):
 
 
 if __name__ == "__main__":
+
+    loop = asyncio.get_event_loop()
+
     filename = "databases"
     secrets = database.load_secrets(filename)
-    loop = asyncio.get_event_loop()
     zeroseg.init(loop, secrets)
 
     for signame in ('SIGINT', 'SIGTERM'):
@@ -34,7 +38,7 @@ if __name__ == "__main__":
     print("Event loop running forever, press Ctrl+C to interrupt.")
     print("pid %s: send SIGINT or SIGTERM to exit." % os.getpid())
 
-    try:
-        loop.run_forever()
-    finally:
-        loop.close()
+    app = web.Application()
+    app.router.add_get('/qr/{id}', views.totp_qrcode(secrets).handler)
+
+    web.run_app(app, port=9000)
