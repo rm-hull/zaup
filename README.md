@@ -32,7 +32,7 @@ On your Raspberry Pi:
     $ sudo pip3 install -r requirements.txt
 
 Next, assuming you have managed to grab a copy of
-`/data/data/com.google.android.apps.authenticator/databases/databases` from
+`/data/data/com.google.android.apps.authenticator2/databases/databases` from
 your android device, copy this file to the **zaup** directory. It is generally
 a good idea to lock down the file permissions:
 
@@ -69,12 +69,12 @@ If you want **zaup** to start automatically when the Raspberry Pi is booted,
 add the following to the `/etc/rc.local` file _before_ the `exit 0` line
 (obviously pick the correct directory, based on where you cloned the repo):
 
-    /home/pi/zaup/main/zaup.py &
+    /home/pi/zaup/zaup/main.py &
 
 else, to jusrt run it on the command-line, enter the following in the _zaup_
 directory:
 
-    $ ./main/zaup.py
+    $ ./zaup/main.py
 
 Cycle through the list of different authenticator codes using the PREV and NEXT
 buttons on the ZeroSeg. Observe the flashing dot which indicates the program
