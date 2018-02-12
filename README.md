@@ -19,7 +19,7 @@ server or should employ the use of a RTC add-on board.
 ```diff
 - Always keep your Raspberry Pi secure: change the default password, especially
 - as the authenticator database has TOTP secrets that could be used to compromise
-- your accounts.
+- your online accounts.
 ```
 
 ## Setup / installation
