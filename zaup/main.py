@@ -13,7 +13,10 @@ import functools
 import signal
 from aiohttp import web
 
-import zeroseg
+try:
+    import zeroseg
+except:
+    pass
 import database
 import views
 
@@ -29,7 +32,8 @@ if __name__ == "__main__":
 
     filename = "databases"
     secrets = database.load_secrets(filename)
-    zeroseg.init(loop, secrets)
+    if 'zeroseg' in globals():
+        zeroseg.init(loop, secrets)
 
     for signame in ('SIGINT', 'SIGTERM'):
         loop.add_signal_handler(getattr(signal, signame),
