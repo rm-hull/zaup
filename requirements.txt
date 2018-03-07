@@ -2,4 +2,5 @@ luma.led_matrix
 onetimepass
 cchardet
 aiohttp
+aiohttp_jinja2
 qrcode

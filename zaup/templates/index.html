@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>ZAUP | TOTP authentication using ZeroSeg</title>
+    <style type="text/css">
+      body {
+        margin-top: 20px;
+      }
+      .token {
+        font-size: 48px;
+        font-weight: bold;
+        color: #2196F3;
+      }
+      .card {
+        width: 400px;
+        margin-right: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="">
+        <div class="jumbotron">
+          <h1 class="display-3">ZAUP</h1>
+          <p class="lead">TOTP authentication using ZeroSeg.</p>
+        </div>
+      </div>
+      <div class="row">
+        {% for secret in secrets %}
+        <div class="card border-secondary mb-3">
+          <div class="card-header">{{ secret[account.issuer] }}</div>
+          <div class="card-body">
+            <h4 class="card-title">{{ secret[account.email] }}</h4>
+            <img src="/qr-code/{{ secret[account._id] }}"/>
+            <span class="token" id="token-{{ secret[account._id] }}"></span>
+          </div>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+    <script type="text/javascript">
+      var interval = 1000;
+      function updateToken(id) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            var elem = document.getElementById("token-" + id);
+            elem.innerHTML = xhr.responseText;
+          }
+        }
+        xhr.open('GET', '/token/' + id);
+        xhr.send();
+
+        setTimeout(function(){ updateToken(id) }, interval)
+      }
+
+      {% for secret in secrets %}
+      updateToken({{ secret[account._id] }});
+      {%- endfor %}
+    </script>
+  </body>
+</html>

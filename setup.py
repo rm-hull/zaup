@@ -18,7 +18,14 @@ setup(
     url="https://github.com/rm-hull/zaup",
     download_url="https://github.com/rm-hull/zaup/tarball/" + version,
     packages=['zaup'],
-    install_requires=["luma.led_matrix", "cchardet", "aiohttp", "qrcode", "onetimepass"],
+    install_requires=[
+        "luma.led_matrix",
+        "cchardet",
+        "aiohttp",
+        "aiohttp_jinja2",
+        "qrcode",
+        "onetimepass"
+    ],
     setup_requires=["pytest-runner"],
     tests_require=["mock", "pytest", "pytest-cov", "python-coveralls"],
     zip_safe=False,

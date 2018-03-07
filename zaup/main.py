@@ -12,6 +12,8 @@ import asyncio
 import functools
 import signal
 from aiohttp import web
+import aiohttp_jinja2
+import jinja2
 
 try:
     import zeroseg
@@ -42,7 +44,11 @@ if __name__ == "__main__":
     print("Event loop running forever, press Ctrl+C to interrupt.")
     print("pid %s: send SIGINT or SIGTERM to exit." % os.getpid())
 
+    view = views.totp(secrets)
     app = web.Application()
-    app.router.add_get('/qr/{id}', views.totp_qrcode(secrets).handler)
-
+    app.router.add_get('/', view.index)
+    app.router.add_get('/token/{id}', view.token)
+    app.router.add_get('/qr-code/{id}', view.qrcode)
+    app.router.add_static('/assets/', path='zaup/public')
+    aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader('zaup/templates'))
     web.run_app(app, port=9000)
