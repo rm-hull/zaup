@@ -1,24 +1,12 @@
 <!doctype html>
 <html lang="en-GB">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <script type="text/javascript" src="assets/js/clipboard.min.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/site.css"/>
     <title>ZAUP | TOTP authentication using ZeroSeg</title>
-    <style type="text/css">
-      body {
-        margin-top: 20px;
-      }
-      .token {
-        font-size: 48px;
-        font-weight: bold;
-        color: #2196F3;
-      }
-      .card {
-        width: 400px;
-        margin-right: 15px;
-      }
-    </style>
   </head>
   <body>
     <div class="container">
@@ -35,20 +23,29 @@
           <div class="card-body">
             <h4 class="card-title">{{ secret[account.email] }}</h4>
             <img src="/qr-code/{{ secret[account._id] }}"/>
-            <span class="token" id="token-{{ secret[account._id] }}"></span>
+            <a href="#"
+              onclick="javascript:return false;"
+              id="anchor-{{ secret[account._id] }}"
+              class="token" title="click to copy" 
+              data-clipboard-target="#token-{{ secret[account._id] }}"></a>
+            <span id="token-{{ secret[account._id] }}" class="hidden"></span>
           </div>
         </div>
         {%- endfor %}
       </div>
     </div>
     <script type="text/javascript">
+      new ClipboardJS(".token");
       var interval = 1000;
       function updateToken(id) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(){
           if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             var elem = document.getElementById("token-" + id);
-            elem.innerHTML = xhr.responseText;
+            if (elem.innerHTML !== xhr.responseText) {
+              elem.innerHTML = xhr.responseText;
+              document.getElementById("anchor-" + id).innerHTML = xhr.responseText;
+            }
           }
         }
         xhr.open('GET', '/token/' + id);
