@@ -12,13 +12,23 @@ import asyncio
 import functools
 import signal
 from aiohttp import web
+from aiohttp_basicauth_middleware import basic_auth_middleware
 import aiohttp_jinja2
 import jinja2
+import hashlib
+import sys
 
 try:
     import zeroseg
-except:
+except ImportError:
     pass
+
+try:
+    import config
+except ImportError:
+    print("No configuration found, run: zaup/add-user.py")
+    sys.exit(-1)
+
 import database
 import views
 
@@ -50,5 +60,9 @@ if __name__ == "__main__":
     app.router.add_get('/token/{id}', view.token)
     app.router.add_get('/qr-code/{id}', view.qrcode)
     app.router.add_static('/assets/', path='zaup/public')
+    app.middlewares.append(basic_auth_middleware(
+        ['/'], config.users,
+        lambda x: hashlib.md5(bytes(x, encoding='utf-8')).hexdigest()))
+
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader('zaup/templates'))
     web.run_app(app, port=9000)

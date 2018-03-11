@@ -23,6 +23,7 @@ setup(
         "cchardet",
         "aiohttp",
         "aiohttp_jinja2",
+        "aiohttp-basicauth-middleware",
         "qrcode",
         "onetimepass"
     ],
