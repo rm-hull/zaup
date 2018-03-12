@@ -8,10 +8,6 @@ body {
   color: #2196F3;
 }
 
-.hidden {
-  display: none;
-}
-
 .card {
   width: 400px;
   margin-right: 15px;

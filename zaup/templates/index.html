@@ -27,8 +27,7 @@
               onclick="javascript:return false;"
               id="anchor-{{ secret[account._id] }}"
               class="token" title="click to copy" 
-              data-clipboard-target="#token-{{ secret[account._id] }}"></a>
-            <span id="token-{{ secret[account._id] }}" class="hidden"></span>
+              data-clipboard-target="#anchor-{{ secret[account._id] }}"></a>
           </div>
         </div>
         {%- endfor %}
@@ -41,10 +40,9 @@
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(){
           if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            var elem = document.getElementById("token-" + id);
+            var elem = document.getElementById("anchor-" + id);
             if (elem.innerHTML !== xhr.responseText) {
               elem.innerHTML = xhr.responseText;
-              document.getElementById("anchor-" + id).innerHTML = xhr.responseText;
             }
           }
         }
