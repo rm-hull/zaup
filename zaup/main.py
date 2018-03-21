@@ -20,7 +20,7 @@ import sys
 
 try:
     import zeroseg
-except ImportError:
+except Exception:
     pass
 
 try:
