@@ -9,7 +9,7 @@
     <title>ZAUP | TOTP authentication using ZeroSeg</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div class="">
         <div class="jumbotron">
           <h1 class="display-3">ZAUP</h1>
@@ -19,10 +19,10 @@
       <div class="row">
         {% for secret in secrets %}
         <div class="card border-secondary mb-3">
-          <div class="card-header">{{ secret[account.issuer] }}</div>
+          <div class="card-header">{{ secret[account.email] }}</div>
           <div class="card-body">
-            <h4 class="card-title">{{ secret[account.email] }}</h4>
-            <img src="/qr-code/{{ secret[account._id] }}"/>
+            <h4 class="card-title">{{ secret[account.issuer] }}</h4>
+            <img class="qr-code" src="/qr-code/{{ secret[account._id] }}"/>
             <a href="#"
               onclick="javascript:return false;"
               id="anchor-{{ secret[account._id] }}"
