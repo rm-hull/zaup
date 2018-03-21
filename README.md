@@ -40,7 +40,7 @@ a good idea to lock down the file permissions:
 
 Next, check that the database content is as expected:
 
-    $ sqlite ./databases
+    $ sqlite3 ./databases
 
     sqlite> pragma table_info(accounts);
     0|_id|INTEGER|0||1
