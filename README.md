@@ -1,12 +1,12 @@
 # Zaup
 [![Maintenance](https://img.shields.io/maintenance/yes/2018.svg?maxAge=2592000)]()
 
-TOTP authentication using [ZeroSeg](https://thepihut.com/products/zeroseg).
+TOTP authentication using [ZeroSeg](https://thepihut.com/products/zeroseg) and Web.
 
 Zaup uses the same sqlite3 database format as [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB);
 this means that if you can copy the database file from your android device (see
 references for links on how to do this) onto a Raspberry Pi, then you can use
-your Pi to display your existing TOTP 2-factor-authentication codes.
+your Pi (or a web browser) to display your existing TOTP 2-factor-authentication codes.
 
 ## Requirements
 
@@ -71,7 +71,7 @@ add the following to the `/etc/rc.local` file _before_ the `exit 0` line
 
     /home/pi/zaup/zaup/main.py &
 
-else, to jusrt run it on the command-line, enter the following in the _zaup_
+else, to just run it on the command-line, enter the following in the _zaup_
 directory:
 
     $ ./zaup/main.py
@@ -80,12 +80,45 @@ Cycle through the list of different authenticator codes using the PREV and NEXT
 buttons on the ZeroSeg. Observe the flashing dot which indicates the program
 is continuously running.
 
+## Starting a Web Server
+
+If you want to use **Zaup** through it's web interface, you must first run a script
+to add one or more user/password combinations - the app is protected by a basic
+authentication scheme. From the _zaup_ directory, enter the following:
+
+
+    $ ./zaup/add_user.py
+
+    This script will add a username/password combination to 'zaup/config.py', for
+    use with basic authentication on the web user interface
+
+      Enter a username: jeff
+      Type a password: ******
+      Re-enter password: ******
+
+    zaup/config.py updated
+
+The `add_user.py` script can be run multiple times to add more users.
+
+Start the web server as follows:
+
+    $ ./zaup/main.py
+    Loading sqlite3 database from: databases
+    Event loop running forever, press Ctrl+C to interrupt.
+    pid 98617: send SIGINT or SIGTERM to exit.
+    ======== Running on http://0.0.0.0:9000 ========
+    (Press CTRL+C to quit)
+
+The server runs on port 9000, and can be terminated by pressing _Ctrl-C_. Any users
+attempting to connect will be challenged with an authentication request.
+
 ## TODO
 
 * Config settings for systemd startup
 * ability to add secrets
 * Demo video
 * Improve error handling when no database file / no records
+* Add countdown timer for web-view
 
 ## References
 
