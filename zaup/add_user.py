@@ -19,7 +19,7 @@ except ImportError:
     pass
 
 
-def write_config(users):
+def write_config(users, google_auth):
     with open("zaup/config.py", "w") as fp:
         fp.write("""# -*- coding: utf-8 -*-
 # Copyright (c) 2018 Richard Hull and contributors
@@ -28,9 +28,12 @@ def write_config(users):
 # This file should NEVER be committed into git!
 # Auto-generated on: {0}
 
-users = {1}""".format(
+users = {1}
+
+google_auth = {2}""".format(
     strftime("%Y-%m-%d %H:%M:%S", gmtime()),
-    json.dumps(users, indent=2, sort_keys=True)))
+    json.dumps(users, indent=2, sort_keys=True),
+    google_auth))
 
 
 if __name__ == "__main__":
@@ -48,10 +51,12 @@ use with basic authentication on the web user interface
 
     if 'config' in globals():
         existing_users = config.users
+        google_auth = '"{0}"'.format(config.google_auth) if hasattr(config, 'google_auth') and config.google_auth else None
     else:
         existing_users = {}
-
+        google_auth = None
+        
     existing_users[username] = hashlib.md5(bytes(password, encoding='utf-8')).hexdigest()
 
-    write_config(existing_users)
+    write_config(existing_users, google_auth)
     print("\nzaup/config.py updated")
