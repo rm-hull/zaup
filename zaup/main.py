@@ -26,7 +26,7 @@ except Exception:
 try:
     import config
 except ImportError:
-    print("No configuration found, run: zaup/add-user.py")
+    print("No configuration found, run: zaup/add_user.py")
     sys.exit(-1)
 
 import database
