@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+"autopep8" = "*"
+rope = "*"
+flake8 = "*"
+
+[packages]
+luma.led_matrix = "*"
+onetimepass = "*"
+cchardet = "*"
+aiohttp = "*"
+aiohttp_jinja2 = "*"
+aiohttp-basicauth-middleware = "*"
+qrcode = "*"
+
+[requires]
+python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true

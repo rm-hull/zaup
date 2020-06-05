@@ -90,3 +90,4 @@ ENV/
 
 databases
 zaup/config.py
+.venv
