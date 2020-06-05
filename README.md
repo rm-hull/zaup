@@ -1,5 +1,5 @@
 # Zaup
-[![Maintenance](https://img.shields.io/maintenance/yes/2019.svg?maxAge=2592000)]()
+[![Maintenance](https://img.shields.io/maintenance/yes/2020.svg?maxAge=2592000)]()
 
 TOTP authentication using [ZeroSeg](https://thepihut.com/products/zeroseg) and Web.
 
