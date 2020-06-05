@@ -30,6 +30,7 @@ except ImportError:
     sys.exit(-1)
 
 import database
+import google_auth
 import views
 
 
@@ -42,8 +43,11 @@ if __name__ == "__main__":
 
     loop = asyncio.get_event_loop()
 
-    filename = "databases"
-    secrets = database.load_secrets(filename)
+    secrets = google_auth.load_secrets(config.google_auth)
+    if secrets is None:
+        filename = "databases"
+        secrets = database.load_secrets(filename)
+    
     if 'zeroseg' in globals():
         zeroseg.init(loop, secrets)
 

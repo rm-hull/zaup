@@ -21,16 +21,16 @@ class totp(object):
 
     def __init__(self, secrets):
         self.factory = qrcode.image.svg.SvgPathImage
-        self.secrets = []
-        for s in secrets:
-            row = list(s)
-            email = row[account.email]
-            if ':' in email:
-                row[account.email] = email.split(':')[1]
+        # self.secrets = []
+        # for s in secrets:
+        #     row = list(s)
+        #     email = row[account.email]
+        #     if ':' in email:
+        #         row[account.email] = email.split(':')[1]
 
-            self.secrets.append(row)
+        #     self.secrets.append(row)
 
-        self.secrets = sorted(self.secrets, key=lambda s: s[account.email])
+        self.secrets = secrets #sorted(self.secrets, key=lambda s: s[account.email])
 
 
     def _get_secret(self, request):

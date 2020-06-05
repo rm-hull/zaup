@@ -25,7 +25,8 @@ setup(
         "aiohttp_jinja2",
         "aiohttp-basicauth-middleware",
         "qrcode",
-        "onetimepass"
+        "onetimepass",
+        "protobuf"
     ],
     setup_requires=["pytest-runner"],
     tests_require=["mock", "pytest", "pytest-cov", "python-coveralls"],
