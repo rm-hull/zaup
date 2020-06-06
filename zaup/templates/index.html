@@ -17,17 +17,17 @@
         </div>
       </div>
       <div class="row">
-        {% for secret in secrets %}
+        {% for index, secret in secrets %}
         <div class="card border-secondary mb-3">
-          <div class="card-header">{{ secret[account.email] }}</div>
+          <div class="card-header" title="{{ secret.name }}">{{ secret.name }}</div>
           <div class="card-body">
-            <h4 class="card-title">{{ secret[account.issuer] }}</h4>
-            <img class="qr-code" src="/qr-code/{{ secret[account._id] }}"/>
+            <h4 class="card-title">{{ secret.issuer }}</h4>
+            <img class="qr-code" src="/qr-code/{{ index }}"/>
             <a href="#"
               onclick="javascript:return false;"
-              id="anchor-{{ secret[account._id] }}"
+              id="anchor-{{ index }}"
               class="token" title="click to copy" 
-              data-clipboard-target="#anchor-{{ secret[account._id] }}"></a>
+              data-clipboard-target="#anchor-{{ index }}"></a>
           </div>
         </div>
         {%- endfor %}
@@ -52,8 +52,8 @@
         setTimeout(function(){ updateToken(id) }, interval)
       }
 
-      {% for secret in secrets %}
-      updateToken({{ secret[account._id] }});
+      {% for index, _ in secrets %}
+      updateToken({{ index }});
       {%- endfor %}
     </script>
   </body>

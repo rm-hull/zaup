@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     loop = asyncio.get_event_loop()
 
-    secrets = google_auth.load_secrets(config.google_auth)
+    secrets = google_auth.load_secrets(config.google_auth) if hasattr(config, "google_auth") else None
     if secrets is None:
         filename = "databases"
         secrets = database.load_secrets(filename)
