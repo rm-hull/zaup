@@ -61,7 +61,7 @@ if __name__ == "__main__":
     view = views.totp(secrets)
     app = web.Application()
     app.router.add_get('/', view.index)
-    app.router.add_get('/token/{id}', view.token)
+    app.router.add_get('/tokens', view.tokens)
     app.router.add_get('/qr-code/{id}', view.qrcode)
     app.router.add_static('/assets/', path='zaup/public')
     app.middlewares.append(basic_auth_middleware(

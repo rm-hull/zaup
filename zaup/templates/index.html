@@ -4,16 +4,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <script type="text/javascript" src="assets/js/vendor/clipboard.min.js"></script>
+    <script type="text/javascript" async src="assets/js/site.js"></script>
+    
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/site.css"/>
     <title>ZAUP | TOTP authentication using ZeroSeg</title>
   </head>
-  <body>
+  <body onload="javascript:init()">
     <div class="container-fluid">
       <div class="">
         <div class="jumbotron">
           <h1 class="display-3">ZAUP</h1>
           <p class="lead">TOTP authentication using ZeroSeg.</p>
+          <div class="countdown-timer">
+            <h2 id="time-left"></h2>
+            <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <circle id="circle" class="circle_animation" 
+                        r="69.85699" cy="81" cx="81" 
+                        stroke-width="8" stroke="none" fill="none"/>
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -33,28 +45,5 @@
         {%- endfor %}
       </div>
     </div>
-    <script type="text/javascript">
-      new ClipboardJS(".token");
-      var interval = 1000;
-      function updateToken(id) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function(){
-          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            var elem = document.getElementById("anchor-" + id);
-            if (elem.innerHTML !== xhr.responseText) {
-              elem.innerHTML = xhr.responseText;
-            }
-          }
-        }
-        xhr.open('GET', '/token/' + id);
-        xhr.send();
-
-        setTimeout(function(){ updateToken(id) }, interval)
-      }
-
-      {% for index, _ in secrets %}
-      updateToken({{ index }});
-      {%- endfor %}
-    </script>
   </body>
 </html>
