@@ -6,6 +6,8 @@ const slice = initialOffset / time;
 const timeLeft = document.getElementById("time-left");
 const circle = document.getElementById('circle');
 
+var handle = null;
+
 function getColor(timeLeft) {
     if (timeLeft > 10 || timeLeft === 1) return "#6fdb6f";
     else if (timeLeft > 5) return "orange";
@@ -35,12 +37,19 @@ function updateTokens() {
         data.tokens.forEach((token, index) => {
             const elem = document.getElementById("anchor-" + index);
             elem.innerHTML = token;
-        });
+        })
+    })
+    .catch(err => {
+      if (handle) {
+        clearInterval(handle);
+        handle = null;
+      }
+      console.error(err);
     });
 }
 
 function init() {
   new ClipboardJS(".token");
   updateTokens();
-  setInterval(updateTokens, interval);
+  handle = setInterval(updateTokens, interval);
 }
