@@ -41,5 +41,6 @@ function updateTokens() {
 
 function init() {
   new ClipboardJS(".token");
+  updateTokens();
   setInterval(updateTokens, interval);
 }
