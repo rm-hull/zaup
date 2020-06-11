@@ -9,13 +9,11 @@ Display a TOTP code based on some stored secrets
 
 import time
 import RPi.GPIO as GPIO
-import onetimepass as otp
 
 from luma.core.serial import spi
 from luma.core.virtual import viewport
 from luma.led_matrix.device import max7219, sevensegment
-
-from database import account
+from secret import get_token
 
 
 def scroll_message(device, msg, delay=0.2):
@@ -41,8 +39,7 @@ class display(object):
 
     def token(self):
         n = self.current % len(self.secrets)
-        token = otp.get_totp(self.secrets[n][account.secret])
-        self.seg.text = "  %06d" % token
+        self.seg.text = "  %s" % get_token(self.secrets[n])
         last_digit = token % 10
         self.loop.call_later(0.8, self.dot, last_digit)
 
@@ -52,9 +49,9 @@ class display(object):
 
     def message(self, next=None):
         n = self.current % len(self.secrets)
-        token = otp.get_totp(self.secrets[n][account.secret])
+        token = get_token(self.secrets[n])
         self.seg.device.clear()
-        scroll_message(self.seg.device, self.secrets[n][account.email])
+        scroll_message(self.seg.device, self.secrets[n].name)
         self.seg.text = "  %06d" % token
 
         if next:
