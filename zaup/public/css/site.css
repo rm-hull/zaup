@@ -16,7 +16,10 @@ body {
 
 .card-body {
   text-align: center;
-  vertical-align: bottom;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .card-header {
