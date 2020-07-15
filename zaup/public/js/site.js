@@ -42,6 +42,7 @@ function updateTokens() {
     .catch(err => {
       if (handle) {
         clearInterval(handle);
+        document.getElementById("modal").classList.add("show");
         handle = null;
       }
       console.error(err);

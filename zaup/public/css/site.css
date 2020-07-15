@@ -62,3 +62,15 @@ svg {
   stroke-dashoffset: 440;
   transition: all 1s linear;
 }
+
+.show {
+  display: block;
+}
+
+.modal {
+  background-color: rgba(0,0,0,0.75);
+}
+
+.modal-header {
+  color: #e51c23;
+}
