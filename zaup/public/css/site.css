@@ -74,3 +74,7 @@ svg {
 .modal-header {
   color: #e51c23;
 }
+
+.card-title {
+  word-break: break-word;
+}

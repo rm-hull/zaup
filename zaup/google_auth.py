@@ -7,6 +7,13 @@ import base64
 
 from migration_payload_pb2 import MigrationPayload
 
+def _normalize(secret):
+    if ':' in secret.name:
+        pos = secret.name.index(":")
+        secret.issuer = secret.name[:pos]
+        secret.name = secret.name[pos + 1:]
+        
+    return secret
 
 def load_secrets(uri):
     if not (uri and uri.startswith("otpauth-migration://offline?data=")):
@@ -16,4 +23,4 @@ def load_secrets(uri):
     data = base64.b64decode(uri[33:])
     payload = MigrationPayload()
     payload.ParseFromString(data)
-    return list(payload.otp_parameters)
+    return [_normalize(secret) for secret in payload.otp_parameters]

@@ -31,9 +31,9 @@
       <div class="row">
         {% for index, secret in secrets %}
         <div class="card border-secondary mb-3">
-          <div class="card-header" title="{{ secret.name }}">{{ secret.name }}</div>
+          <div class="card-header">{{ secret.issuer }}</div>
           <div class="card-body">
-            <h4 class="card-title">{{ secret.issuer }}</h4>
+            <h5 class="card-title">{{ secret.name }}</h5>
             <img class="qr-code" src="/qr-code/{{ index }}"/>
             <a href="#"
               onclick="javascript:return false;"
