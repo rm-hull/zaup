@@ -77,6 +77,9 @@ svg {
 
 .card-title {
   word-break: break-word;
+  max-height: 2.5rem;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon {
