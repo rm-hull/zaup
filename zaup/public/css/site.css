@@ -78,3 +78,8 @@ svg {
 .card-title {
   word-break: break-word;
 }
+
+.icon {
+  padding-right: 5px;
+  width: 24px;
+}

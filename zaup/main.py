@@ -69,4 +69,5 @@ if __name__ == "__main__":
         lambda x: hashlib.md5(bytes(x, encoding='utf-8')).hexdigest()))
 
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader('zaup/templates'))
+    aiohttp_jinja2.get_env(app).globals.update(icon=view.icon)
     web.run_app(app, port=9000)

@@ -19,7 +19,18 @@ from secret import get_token
 TOTP_URI = "otpauth://totp/{0}?secret={1}&issuer={2}"
 
 
+
 class totp(object):
+
+    ICONS = {
+        'Amazon Web Services': 'https://aws.amazon.com/favicon.ico',
+        'GitHub': 'https://github.com/favicon.ico',
+        'Google': 'https://www.google.com/favicon.ico',
+        'npm': 'https://external-content.duckduckgo.com/ip3/www.npmjs.com.ico',
+        'FreeAgent': 'https://freeagent.com/favicon.ico',
+        'Slack': 'https://slack.com/favicon.ico',
+        'DigitalOcean': 'https://www.digitalocean.com/favicon.ico'
+    }
 
     def __init__(self, secrets):
         self.factory = qrcode.image.svg.SvgPathImage
@@ -55,3 +66,8 @@ class totp(object):
     @aiohttp_jinja2.template('index.html')
     async def index(self, request):
         return {'secrets': list(enumerate(self.secrets))}
+        
+    def icon(self, issuer):
+        for name, url in self.ICONS.items():
+            if issuer.startswith(name):
+                return url
