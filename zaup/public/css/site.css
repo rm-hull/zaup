@@ -75,10 +75,22 @@ svg {
   color: #e51c23;
 }
 
+
 .card-title {
   word-break: break-word;
   max-height: 2.5rem;
+}
+
+.ellipsis {
+  cursor: help;
   overflow-y: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  display: -webkit-box;
+  margin: 0 auto;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 

@@ -36,7 +36,7 @@
             {{- secret.issuer -}}
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{ secret.name }}</h5>
+            <h5 class="card-title ellipsis" title="{{ secret.name }}"><span>{{ wbr(secret.name)|safe }}</span></h5>
             <img class="qr-code" src="/qr-code/{{ index }}"/>
             <a href="#"
               onclick="javascript:return false;"

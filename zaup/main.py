@@ -39,6 +39,10 @@ def ask_exit(signame):
     loop.stop()
 
 
+def wbr(text):
+    return text.replace('@', '<wbr/>@<wbr/>')
+
+
 if __name__ == "__main__":
 
     loop = asyncio.get_event_loop()
@@ -70,4 +74,6 @@ if __name__ == "__main__":
 
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader('zaup/templates'))
     aiohttp_jinja2.get_env(app).globals.update(icon=view.icon)
+    aiohttp_jinja2.get_env(app).globals.update(wbr=wbr)
+    
     web.run_app(app, port=9000)
