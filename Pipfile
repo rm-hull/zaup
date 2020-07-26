@@ -9,7 +9,7 @@ rope = "*"
 flake8 = "*"
 
 [packages]
-luma.led_matrix = "*"
+"luma.led_matrix" = "*"
 onetimepass = "*"
 cchardet = "*"
 aiohttp = "*"
