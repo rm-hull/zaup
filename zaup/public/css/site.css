@@ -98,3 +98,12 @@ svg {
   padding-right: 5px;
   width: 24px;
 }
+.title {
+  font-weight: 600;
+  color: black;
+}
+
+.logo {
+  width: 100px;
+  margin-top: -14px;
+}
