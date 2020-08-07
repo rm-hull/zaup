@@ -7,6 +7,7 @@ const timeLeft = document.getElementById("time-left");
 const circle = document.getElementById('circle');
 
 var handle = null;
+var timerId = null;
 
 function getColor(timeLeft) {
     if (timeLeft > 10 || timeLeft === 1) return "#6fdb6f";
@@ -49,8 +50,19 @@ function updateTokens() {
     });
 }
 
+function showSnackbarMessage(message, duration=5000) {
+  const snackbar = document.getElementById('snackbar');
+  document.getElementById("snackbar-message").innerText = message;
+  snackbar.classList.add("show");
+  if (timerId) {
+    clearTimeout(timerId);
+  }
+  timerId = setTimeout(() => snackbar.classList.remove("show"), duration);
+}
+
 function init() {
-  new ClipboardJS(".token");
+  const clipboard = new ClipboardJS(".token");
+  clipboard.on('success', e => showSnackbarMessage(`Copied "${e.text}" to the clipboard.`));
   updateTokens();
   handle = setInterval(updateTokens, interval);
 }

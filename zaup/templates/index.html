@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="assets/css/site.css"/>
     <title>ZAUP | TOTP authentication using ZeroSeg</title>
   </head>
-  <body onload="javascript:init()">
+  <body class="d-flex flex-column h-100" onload="javascript:init()">
+    <main class="flex-shrink-0">
     <div class="container-fluid">
       <div class="">
         <div class="jumbotron">
@@ -48,18 +49,24 @@
         </div>
         {%- endfor %}
       </div>
-    </div>
-    <div class="modal fade" id="modal" tabindex="-1" data-backdrop="static" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">An error has occurred</h5>
-          </div>
-          <div class="modal-body">
-            Connection to the server was interrupted.
+      </div>
+      <div class="modal fade" id="modal" tabindex="-1" data-backdrop="static" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">An error has occurred</h5>
+            </div>
+            <div class="modal-body">
+              Connection to the server was interrupted.
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    <footer class="fixed-bottom footer mt-auto py-3">
+      <div id="snackbar" class="container-fluid d-flex justify-content-center fade">
+        <span id="snackbar-message" class="alert alert-success"></span>
+      </div>
+    </footer>
   </body>
 </html>
