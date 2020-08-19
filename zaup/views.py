@@ -47,7 +47,7 @@ class totp(object):
             return web.Response(status=404)
 
         uri = TOTP_URI.format(secret.name,
-                              b32encode(secret.secret),
+                              b32encode(secret.secret).decode('UTF-8'),
                               secret.issuer)
 
         output = io.BytesIO()
