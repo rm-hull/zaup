@@ -29,7 +29,8 @@ class totp(object):
         'npm': 'https://external-content.duckduckgo.com/ip3/www.npmjs.com.ico',
         'FreeAgent': 'https://freeagent.com/favicon.ico',
         'Slack': 'https://slack.com/favicon.ico',
-        'DigitalOcean': 'https://www.digitalocean.com/favicon.ico'
+        'DigitalOcean': 'https://www.digitalocean.com/favicon.ico',
+        'gitlab.com': 'https://gitlab.com/assets/favicon-7901bd695fb93edb07975966062049829afb56cf11511236e61bcf425070e36e.png'
     }
 
     def __init__(self, secrets):
