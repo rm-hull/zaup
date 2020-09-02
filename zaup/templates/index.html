@@ -34,7 +34,9 @@
         {% for index, secret in secrets %}
         <div class="card border-secondary mb-3">
           <div class="card-header">
-            <img class="icon" src="{{ icon(secret.issuer) }}"/>
+            {% if icon(secret.issuer) %}
+              <img class="icon" src="{{ icon(secret.issuer) }}"/>
+            {% endif %}
             {{- secret.issuer -}}
           </div>
           <div class="card-body">
