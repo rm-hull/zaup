@@ -110,3 +110,7 @@ svg {
   width: 100px;
   margin-top: -14px;
 }
+
+.hide {
+  display: none;
+}

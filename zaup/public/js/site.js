@@ -65,4 +65,8 @@ function init() {
   clipboard.on('success', e => showSnackbarMessage(`Copied "${e.text}" to the clipboard.`));
   updateTokens();
   handle = setInterval(updateTokens, interval);
+  
+  // Stop annoying flicker of green snackbar message on startup
+  const snackbar = document.getElementById('snackbar');
+  snackbar.classList.remove("hide");
 }
