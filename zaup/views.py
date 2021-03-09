@@ -19,7 +19,6 @@ from secret import get_token
 TOTP_URI = "otpauth://totp/{0}?secret={1}&issuer={2}"
 
 
-
 class totp(object):
 
     ICONS = {
@@ -30,7 +29,10 @@ class totp(object):
         'FreeAgent': 'https://freeagent.com/favicon.ico',
         'Slack': 'https://slack.com/favicon.ico',
         'DigitalOcean': 'https://www.digitalocean.com/favicon.ico',
-        'gitlab.com': 'https://gitlab.com/assets/favicon-7901bd695fb93edb07975966062049829afb56cf11511236e61bcf425070e36e.png'
+        'gitlab.com': 'https://gitlab.com/assets/favicon-7901bd695fb93edb07975966062049829afb56cf11511236e61bcf425070e36e.png',
+        'Heroku': 'https://www.herokucdn.com/favicon.ico',
+        'microsoft.com': 'https://c.s-microsoft.com/favicon.ico?v2',
+        'PyPI': 'https://pypi.org/static/images/favicon.6a76275d.ico'
     }
 
     def __init__(self, secrets):
@@ -41,7 +43,7 @@ class totp(object):
         n = int(request.match_info.get('id'))
         if 0 <= n < len(self.secrets):
             return self.secrets[n]
-            
+
     async def qrcode(self, request):
         secret = self._get_secret(request)
         if secret is None:
@@ -63,12 +65,12 @@ class totp(object):
         time_left = 30 - int(time.time()) % 30
         result = dict(tokens=tokens, timeLeft=time_left)
         return web.Response(body=json.dumps(result), content_type="application/json")
-        
+
     @aiohttp_jinja2.template('index.html')
     async def index(self, request):
         return {'secrets': list(enumerate(self.secrets))}
-        
-    def icon(self, issuer):
+
+    def icon(self, secret):
         for name, url in self.ICONS.items():
-            if issuer.startswith(name):
+            if secret.issuer.startswith(name) or secret.name.endswith(name):
                 return url
