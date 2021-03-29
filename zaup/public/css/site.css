@@ -2,10 +2,16 @@ body {
   margin-top: 20px;
 }
 
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .token {
   font-size: 48px;
   font-weight: bold;
-  color: #2196F3;
+  color: #2196f3;
   display: block;
   padding: 0 10px;
   border-radius: 8px;
@@ -33,7 +39,7 @@ body {
 }
 
 .row {
-  margin-left: 0;
+  margin-left: 20px;
   margin-right: 0;
 }
 
@@ -78,7 +84,6 @@ svg {
 .modal-header {
   color: #e51c23;
 }
-
 
 .card-title {
   word-break: break-word;
