@@ -32,7 +32,8 @@ class totp(object):
         'gitlab.com': 'https://gitlab.com/assets/favicon-7901bd695fb93edb07975966062049829afb56cf11511236e61bcf425070e36e.png',
         'Heroku': 'https://www.herokucdn.com/favicon.ico',
         'microsoft.com': 'https://c.s-microsoft.com/favicon.ico?v2',
-        'PyPI': 'https://pypi.org/static/images/favicon.6a76275d.ico'
+        'PyPI': 'https://pypi.org/static/images/favicon.6a76275d.ico',
+        '1Password': 'https://1password.com/icons/favicon-v1.ico'
     }
 
     def __init__(self, secrets):
